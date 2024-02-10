@@ -33,6 +33,16 @@ class DynamicArray:
         self._array[index] = obj
         self._n += 1
 
+    def remove(self, obj):
+        """Remove first occurrence of value( or raise ValueError)."""
+        for index in range(self._n):
+            if self._array[index] == obj:  # Try finding a match.
+                for item in range(index, self._n - 1):
+                    self._array[item] = self._array[item + 1]
+                self._n -= 1
+            else:
+                raise ValueError("Value not found")
+
     def _resize(self, new_capacity):
         """Create a bigger array"""
         new_array = self.creat_array(new_capacity)  # Create a bigger array
