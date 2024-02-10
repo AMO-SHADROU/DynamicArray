@@ -18,10 +18,20 @@ class DynamicArray:
         return self._array[index]
 
     def append(self, obj):
-        if self._n == self._capacity:
+        """Add an element to the end of the array."""
+        if self._n == self._capacity:  # if the array is full, resize
             self._resize(self._capacity * 2)
         self._array[self._n] = obj
         self._n += 1  # increasing existing elements
+
+    def insert(self, index, obj):
+        """Insert an element at index"""
+        if self._n == self._capacity:  # if the array is full, resize
+            self._resize(self._capacity * 2)
+        for element in range(self._n, index, -1):
+            self._array[element] = self._array[element - 1]
+        self._array[index] = obj
+        self._n += 1
 
     def _resize(self, new_capacity):
         """Create a bigger array"""
